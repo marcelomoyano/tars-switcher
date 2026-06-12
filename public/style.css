@@ -1,0 +1,425 @@
+:root {
+  --bg: #0a0a0a;
+  --panel: #111110;
+  --line: #232320;
+  --ink: #d8d2c4;
+  --dim: #6d6a60;
+  --amber: #ffb000;
+  --amber-dim: #5a4408;
+  --red: #ff3b30;
+  --green: #34d058;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-height: 100%;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+}
+
+.title {
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: 0.08em;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--dim);
+  box-shadow: 0 0 0 0 transparent;
+}
+.dot.live {
+  background: var(--red);
+  animation: pulse 1.6s infinite;
+}
+.dot.connected {
+  background: var(--green);
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(255, 59, 48, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 48, 0);
+  }
+}
+
+.uptime {
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+  min-width: 64px;
+  text-align: right;
+}
+
+.size-btn {
+  padding: 5px 9px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--dim);
+}
+.size-btn:hover {
+  color: var(--ink);
+}
+
+/* ── stage: two WHEP feeds, preview (green) left, program (amber) right ── */
+.stage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: none;
+  padding: 14px;
+}
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.feed-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.mon-btn {
+  padding: 3px 8px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--dim);
+  border-color: var(--line);
+}
+.mon-btn.on {
+  background: var(--amber);
+  color: #1a1300;
+  border-color: var(--amber);
+}
+.feed-preview .feed-label {
+  color: var(--green);
+}
+.feed-program .feed-label {
+  color: var(--amber);
+}
+.feed-scene {
+  color: var(--dim);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+.feed-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.feed-preview .feed-video {
+  border-color: var(--green);
+}
+.feed-program .feed-video {
+  border-color: var(--amber);
+}
+.feed-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.feed-ph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dim);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+}
+.feed-ph.hidden {
+  display: none;
+}
+
+/* LARGE: only the feeds grow — break the stage out of the 760px column and
+   re-center it on the viewport. Control panels below stay exactly where they are. */
+body.large .stage {
+  width: min(1280px, 94vw);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: none;
+  padding: 14px;
+}
+.bar + .panel {
+  border-top: none;
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+
+.dim {
+  color: var(--amber-dim);
+  font-weight: 400;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button {
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 9px 14px;
+  transition: background 0.08s, border-color 0.08s, color 0.08s;
+}
+button:hover {
+  border-color: var(--amber-dim);
+}
+button:active {
+  transform: translateY(1px);
+}
+
+/* scene buttons: program = amber fill (on-air), preview = green outline (staged) */
+.scene {
+  border-color: #2c2c28;
+}
+.scene.preview {
+  border-color: var(--green);
+  color: var(--green);
+}
+.scene.active {
+  background: var(--amber);
+  color: #1a1300;
+  border-color: var(--amber);
+  font-weight: 700;
+}
+/* staged scene that is also on-air keeps amber fill but flags it */
+.scene.active.preview {
+  box-shadow: inset 0 0 0 2px var(--green);
+}
+
+/* transition controls (Studio Mode only) */
+.transition {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.transition.hidden {
+  display: none;
+}
+.cut-btn,
+.take-btn {
+  flex: 1;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 14px;
+}
+.cut-btn {
+  border-color: var(--red);
+  color: var(--red);
+}
+.cut-btn:hover {
+  background: var(--red);
+  color: #1a0000;
+  border-color: var(--red);
+}
+.take-btn {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+.take-btn:hover {
+  background: var(--amber);
+  color: #1a1300;
+  border-color: var(--amber);
+}
+
+/* source toggles */
+.source {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.source .box {
+  color: var(--dim);
+}
+.source.on {
+  border-color: var(--amber-dim);
+  color: var(--ink);
+}
+.source.on .box {
+  color: var(--amber);
+}
+.source.off {
+  color: var(--dim);
+}
+
+/* audio rows */
+.audio {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.aud {
+  display: grid;
+  grid-template-columns: 130px 64px 1fr 52px;
+  align-items: center;
+  gap: 12px;
+}
+.aud .name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mute {
+  padding: 6px 10px;
+  font-size: 11px;
+}
+.mute.muted {
+  background: var(--red);
+  border-color: var(--red);
+  color: #1a0000;
+  font-weight: 700;
+}
+.db {
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(var(--amber-dim), var(--amber-dim)) no-repeat,
+    #1c1c19;
+  background-size: var(--fill, 50%) 100%;
+  border: 1px solid var(--line);
+  outline: none;
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 16px;
+  background: var(--amber);
+  border: none;
+}
+input[type='range']::-moz-range-thumb {
+  width: 10px;
+  height: 16px;
+  border: none;
+  background: var(--amber);
+  border-radius: 0;
+}
+
+footer.bar {
+  border-top: none;
+}
+.stream-ctl {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+}
+.stream-btn {
+  font-weight: 700;
+}
+.stream-btn.go {
+  border-color: var(--green);
+  color: var(--green);
+}
+.stream-btn.stop {
+  background: var(--red);
+  border-color: var(--red);
+  color: #1a0000;
+}
+.operators b {
+  color: var(--amber);
+}
+
+.conn {
+  text-align: center;
+  color: var(--dim);
+  font-size: 11px;
+  padding: 8px;
+  letter-spacing: 0.1em;
+}
+.conn.bad {
+  color: var(--red);
+}
+.conn.ok {
+  color: var(--green);
+  opacity: 0.6;
+}
+
+.empty {
+  color: var(--dim);
+  font-style: normal;
+  padding: 4px 0;
+}

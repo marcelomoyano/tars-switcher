@@ -1,0 +1,8 @@
+name = "tars-switcher-token"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+account_id = "abd3cd6971fc9a2614ae3afed10e3b30"  # Marcelo@streamless.io
+
+# Secret (do NOT put the key here): set it with
+#   npx wrangler secret put ABLY_API_KEY
+# Value = the Ably "tars-switcher" key, e.g. appId.keyId:keySecret

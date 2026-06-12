@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TARS-Switcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main id="app">
+      <header class="bar">
+        <span class="title" id="title">CAPITAL FLOWS · SWITCHER</span>
+        <span class="status">
+          <button class="size-btn" id="size-btn" title="feed size">REGULAR</button>
+          <span class="dot" id="live-dot"></span>
+          <span id="live-label">OFFLINE</span>
+          <span class="uptime" id="uptime">00:00:00</span>
+        </span>
+      </header>
+
+      <section class="stage" id="stage">
+        <div class="feed feed-preview">
+          <div class="feed-label">
+            <span>PREVIEW <span class="feed-scene" id="preview-scene"></span></span>
+            <button class="mon-btn" id="mon-preview" title="monitor audio">♪ MON</button>
+          </div>
+          <div class="feed-video">
+            <video id="whep-preview" autoplay muted playsinline></video>
+            <span class="feed-ph" id="preview-ph">PREVIEW STOPPED</span>
+          </div>
+        </div>
+        <div class="feed feed-program">
+          <div class="feed-label">
+            <span>PROGRAM <span class="feed-scene" id="program-scene"></span></span>
+            <button class="mon-btn" id="mon-program" title="monitor audio">♪ MON</button>
+          </div>
+          <div class="feed-video">
+            <video id="whep-program" autoplay muted playsinline></video>
+            <span class="feed-ph" id="program-ph">PROGRAM STOPPED</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>SCENES <span class="dim" id="scenes-mode"></span></h2>
+        <div class="row" id="scenes"></div>
+        <div class="transition" id="transition">
+          <button id="cut-btn" class="cut-btn">CUT</button>
+          <button id="take-btn" class="take-btn">TAKE</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>SOURCES <span class="dim" id="sources-scene"></span></h2>
+        <div class="row" id="sources"></div>
+      </section>
+
+      <section class="panel">
+        <h2>AUDIO</h2>
+        <div class="audio" id="audio"></div>
+      </section>
+
+      <footer class="bar">
+        <span class="stream-ctl">
+          STREAM
+          <button id="stream-btn" class="stream-btn">— —</button>
+        </span>
+        <span class="operators">operators online: <b id="operators">0</b></span>
+      </footer>
+
+      <div class="conn" id="conn">connecting…</div>
+    </main>
+    <script src="/runtime-config.js"></script>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

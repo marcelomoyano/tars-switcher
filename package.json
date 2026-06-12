@@ -1,0 +1,16 @@
+{
+  "name": "tars-switcher",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Strip OBS down to a show. Two operators, browser, concurrent control.",
+  "scripts": {
+    "start": "node bridge/server.js",
+    "dev": "node --watch bridge/server.js"
+  },
+  "dependencies": {
+    "ably": "^2.5.0",
+    "obs-websocket-js": "^5.0.6",
+    "ws": "^8.18.0"
+  }
+}

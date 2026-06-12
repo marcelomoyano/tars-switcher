@@ -1,0 +1,26 @@
+{
+  "obs": {
+    "url": "ws://localhost:4455",
+    "password": ""
+  },
+  "server": {
+    "port": 4466
+  },
+  "transport": {
+    "mode": "ably",
+    "clientId": "capital-flows",
+    "ably": {}
+  },
+  "show": {
+    "title": "CAPITAL FLOWS · SWITCHER",
+    "studioMode": true,
+    "sceneCollection": "",
+    "scenes": [],
+    "hidePrefix": "_",
+    "audioInputs": [],
+    "whep": {
+      "preview": "https://playback.streamless.io/tars-switcher/preview/live/whep",
+      "program": "https://playback.streamless.io/tars-switcher/program/live/whep"
+    }
+  }
+}
